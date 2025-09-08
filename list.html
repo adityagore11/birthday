@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Birthday List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>?? Birthday List</header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="add.html">Add Birthday</a>
+    <a href="list.html">Birthday List</a>
+    <a href="reminder.html">Reminders</a>
+    <a href="about.html">About</a>
+  </nav>
+
+  <div class="container">
+    <h1>All Saved Birthdays</h1>
+    <ul id="birthdayList"></ul>
+  </div>
+
+  <script>
+    function loadList(){
+      let birthdays = JSON.parse(localStorage.getItem("birthdays") || "[]");
+      let list = document.getElementById("birthdayList");
+      list.innerHTML = birthdays.map(b => `<li>${b.name} - ${b.date}</li>`).join("");
+    }
+    loadList();
+  </script>
+</body>
+</html>

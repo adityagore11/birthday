@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Birthday</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>?? Add Birthday</header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="add.html">Add Birthday</a>
+    <a href="list.html">Birthday List</a>
+    <a href="reminder.html">Reminders</a>
+    <a href="about.html">About</a>
+  </nav>
+
+  <div class="container">
+    <h1>Add a New Birthday</h1>
+    <form id="birthdayForm">
+      <input type="text" id="name" placeholder="Enter Name" required>
+      <input type="date" id="date" required>
+      <button type="submit">Save Birthday</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("birthdayForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      let name = document.getElementById("name").value;
+      let date = document.getElementById("date").value;
+      let birthdays = JSON.parse(localStorage.getItem("birthdays") || "[]");
+      birthdays.push({name, date});
+      localStorage.setItem("birthdays", JSON.stringify(birthdays));
+      alert("Birthday saved!");
+      this.reset();
+    });
+  </script>
+</body>
+</html>

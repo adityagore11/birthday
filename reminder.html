@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reminders</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>?? Birthday Reminders</header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="add.html">Add Birthday</a>
+    <a href="list.html">Birthday List</a>
+    <a href="reminder.html">Reminders</a>
+    <a href="about.html">About</a>
+  </nav>
+
+  <div class="container">
+    <h1>Today's Birthdays ??</h1>
+    <ul id="today"></ul>
+  </div>
+
+  <script>
+    function checkToday(){
+      let today = new Date().toISOString().slice(5,10);
+      let birthdays = JSON.parse(localStorage.getItem("birthdays") || "[]");
+      let list = document.getElementById("today");
+      let todays = birthdays.filter(b => b.date.slice(5,10) === today);
+      list.innerHTML = todays.length ? todays.map(b=> `<li>${b.name}</li>`).join("") : "<li>No birthdays today.</li>";
+    }
+    checkToday();
+  </script>
+</body>
+</html>

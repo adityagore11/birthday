@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Birthday Reminder - Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>?? Birthday Event Reminder</header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="add.html">Add Birthday</a>
+    <a href="list.html">Birthday List</a>
+    <a href="reminder.html">Reminders</a>
+    <a href="about.html">About</a>
+  </nav>
+
+  <div class="container">
+    <h1>Welcome!</h1>
+    <p>This is your personal Birthday Reminder website. ??</p>
+    <h2>Upcoming Birthdays</h2>
+    <ul id="upcoming"></ul>
+  </div>
+
+  <script>
+    function loadUpcoming() {
+      let birthdays = JSON.parse(localStorage.getItem("birthdays") || "[]");
+      birthdays.sort((a,b)=> new Date(a.date) - new Date(b.date));
+      let list = document.getElementById("upcoming");
+      list.innerHTML = birthdays.slice(0,5).map(b => `<li>${b.name} - ${b.date}</li>`).join("");
+    }
+    loadUpcoming();
+  </script>
+</body>
+</html>
